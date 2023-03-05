@@ -1,0 +1,191 @@
+.image-carousel {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        .arrow-btn--left {
+            left: 0;
+        }
+        .arrow-btn--right {
+            right: 0;
+        }
+    }
+
+    &__container {
+        display: flex;
+        transform: translateX(0);
+        transition: transform .5s ease-in-out;
+    }
+
+    .slide {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content; 
+        
+        &__image {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1; 
+        }
+
+        &__content {
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1;
+            align-self: center;
+            z-index: 1; 
+
+            max-width: 80rem;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+
+            .sub-heading {
+                font-size: 4.8rem;
+                font-weight: 300;
+                color: #fff;
+                margin: 0 0 1rem;
+            }
+
+            .main-heading {
+                font-size: 4.8rem;
+                font-weight: 900;
+                color: #fff;
+                margin: 0 0 3rem;
+            }
+
+            .description {
+                font-weight: 700;
+                line-height: 1.5;
+                color: #fff;
+                max-width: 60rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .btn {
+                display: inline-block;
+                text-decoration: none;
+                color: #fff;
+                background-color: #0d6efd;
+                padding: 1.2rem 2.5rem;
+                border-radius: .5rem;
+                transition: .3s all ease;
+
+                &:hover {
+                    background-color: #0c5cd4;
+                }
+            }
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(#000, .4);
+
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1; 
+            z-index: 1;
+        }
+    }
+
+    .arrow-btn {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0; 
+        width: 8.5rem;
+        height: 100%;
+        background-color: rgba(#000, .35);
+        cursor: pointer;
+        transition: background-color .3s, left .5s, right .5s;
+        transition-timing-function: ease;
+
+        &:hover {
+            background-color: rgba(#000, .5);
+            .arrow {
+                border-color: rgba(#fff, .4);
+            }
+        }
+
+        &--left {
+            left: -8.5rem;
+        }
+
+        &--right {
+            right: -8.5rem;
+        }
+    }
+
+    .arrow {
+        border: solid rgba(#fff, .35);
+        border-width: 0 .7rem .7rem 0;
+        display: inline-block;
+        padding: .7rem;
+        position: absolute;
+        top: 50%; 
+        transition: border-color .3s ease;
+
+        &--right {
+            right: 50%;
+            transform: rotate(-45deg) translateX(50%);
+            margin-top: -1.45rem;
+          }
+          
+        &--left {
+            right: 50%;
+            transform: rotate(135deg) translateX(-50%);
+            margin-top: -1.45rem;
+        }
+    }
+
+    .dots {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+        span {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 100%;
+            background-color: rgba(#000, .5);
+            cursor: pointer;
+
+            &:not(:last-child) {
+                margin-right: .5rem;
+            }
+
+            &.active {
+                background-color: rgba(#000, .95);
+            }
+        }
+    }
+     
+    &.fade {
+        .image-carousel__container {
+            transition: none;
+        }
+
+        .slide {
+            opacity: 0;
+            transition: opacity .5s ease-out;
+
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
+
+}
